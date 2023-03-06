@@ -1,2 +1,1 @@
-# Start course
-# ForProgramming
+# Start course ForProgramming
