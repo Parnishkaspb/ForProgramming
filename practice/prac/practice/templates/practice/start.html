@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Стартовая страница
+{% endblock %}
+
+
+{% block content %}
+    {% comment %} <header>
+        <p class='uptext'> computer literacy online </p>
+    </header> {% endcomment %}
+    <img class='up-main' src="{% static 'image/TextPlashNew.png' %}">
+
+    <img class='middle-main' src="{% static 'image/Allura Exploring on Laptop.png' %}">
+
+    <div class='down-main'>
+        <a href="/new/{{new}}" class='btn btn-outline-primary'> Новичок </a>
+        <a href="/profi/{{profi}}" class='btn btn-outline-primary'> Профи </a>
+        <a href="/expert/{{expert}}" class='btn btn-outline-primary'> Эксперт </a>
+    </div>
+
+    <footer style='margin-top: 50px;'>
+        <p class='downtext'> 2023 - computer literacy online - Красников Б. - Давыдова О. - Мерзликина А. </p>
+    </footer>
+
+    <script type="module" src="{% static 'js/js.cookie.mjs' %}"></script>
+    <script type="module">
+        import Cookies from '{% static 'js/js.cookie.mjs' %}'
+        Cookies.remove('answers');
+    </script>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Новичок
+{% endblock title%}
+
+
+{% block content %}
+<img class='image-final-1-1' src="{% static 'image/1.png' %}">
+<img class='image-final-2-2' src="{% static 'image/2.png' %}">
+<div class='question'>
+    {% comment %} </br>
+</br> {% endcomment %}
+    
+    {% comment %} <input deactivate type='text' value='{{ question }}'> {% endcomment %}
+    {% comment %} <p style='margin-top: 50px'>  </p> {% endcomment %}
+    <h4 class='secret'> Поздравляем! Вы прошли наш тест! </h4>
+    <span style='margin-bottom: 50px'> {{ question }} </span>
+</br>
+    {% comment %} <h4 class='secret'> Поздравляем! Вы прошли наш тест! </h4> {% endcomment %}
+    
+</br>
+</div>
+{% comment %} <div class='btn btn-danger'>
+    {{ question }}
+</div> {% endcomment %}
+<div class='center'>
+    <table border="0"> 
+        {% comment %} {{answers|length}} {% endcomment %}
+        {% for item in answers %} 
+        <label for='{{item.answer}} ' style='border-radius: 15px; width: 70%; background-color: #7fc7ff; color: #042975; border-color: #042975;' class='max btn btn-success' >
+            <input type='radio' id='{{item.answer}}' value='{{item.rightanswer}}' name='answers'>  {{item.answer}} 
+        </label>
+        {% comment %} <trstyle='width: 100%'>
+            <th style='width: 100%'>
+                
+            </th>
+         </tr>  {% endcomment %}
+        {% endfor %}
+    </table>
+</div>
+
+<div class='next-one'>
+    <button id='nextquestion' style='border-radius: 15px;' class='btn btn-warning' > 
+        {% if next == -1 %}
+            Закончить тест
+        {% else %}
+            Следующий вопрос
+        {% endif %} 
+    </button>
+</div>
+</div>
+
+<script type="module">
+    import Cookies from '{% static 'js/js.cookie.mjs' %}'
+    $('#clickss').click(function(){
+        alert('ad');
+        //alert(this.name);
+    });
+    
+    $("#nextquestion").click(function(){
+        let simple = Cookies.get('answers');
+        if (typeof simple == "undefined"){
+            Cookies.set('answers', $('input[name=answers]:checked').val(), { secure: true });
+            //alert(Cookies.get('answers'));
+        } else {
+            let a = Cookies.get('answers') + "," + $('input[name=answers]:checked').val();
+            Cookies.set('answers', a, { secure: true });
+            //alert(Cookies.get('answers'));
+        }
+        if ({{next}} == -1){
+            Cookies.set('what', 'new', { secure: true });
+            window.location.href = "/final";
+        } else {
+            window.location.href = "/new/{{next}}";
+        }  
+    });
+</script>
+{% endblock content%}

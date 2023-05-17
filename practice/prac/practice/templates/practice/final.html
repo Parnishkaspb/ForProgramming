@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Финал
+{% endblock title%}
+
+
+{% block content %}
+
+<script type="module">
+    import Cookies from '{% static 'js/js.cookie.mjs' %}'
+    //alert(Cookies.get('what'))
+    let Good = 0;
+    let simple = Cookies.get('answers');
+    const myArray = simple.split(",");
+    for (let i = 0; i < myArray.length; ++i){
+        if (myArray[i] == 'True'){
+            Good++;
+        }
+    }
+    document.getElementById('dd').innerHTML = 'Правильных ответ: ' + Good + " из " +myArray.length;
+    {% comment %} alert(Good);
+    alert(myArray.length); {% endcomment %}
+    if (Good == myArray.length){
+        document.getElementById("girl").innerHTML="<img style='width: 15%; margin-top:10px' src='{% static 'image/Happy.png' %}' />"
+    } else if (Good == 0){
+        document.getElementById("girl").innerHTML="<img style='width: 15%; margin-top:10px' src='{% static 'image/NotHappy.png' %}' />"
+    } else {
+        document.getElementById("girl").innerHTML="<img style='width: 15%; margin-top:10px' src='{% static 'image/MaybeHappy.png' %}' />"
+    }
+
+    
+    
+    
+    {% comment %} alert(); {% endcomment %}
+    {% comment %} alert(myArray.length); {% endcomment %}
+    
+</script>
+
+<img class='image-final-1' src="{% static 'image/1.png' %}">
+<img class='image-final-2' src="{% static 'image/2.png' %}">
+<div id='girl'>
+</div>
+
+{% comment %} <div class='sssss'>
+   
+</div> {% endcomment %}
+
+<div class='krle' style='margin-left: 30%;width: 40%; border-radius: 10px; border: 1px solid; box-shadow: 4px 2px 30px 4px rgba(31, 104, 250, 0.49);'>
+    <h4 class='secret'> Поздравляем! Вы прошли наш тест! </h4>
+    <h4> Поздравляем! Вы прошли наш тест! </h4>
+</br>
+    <h8 id='dd'> </h8>
+</br>
+<h4 class='secret'> Поздравляем! Вы прошли наш тест! </h4>
+</div>
+<div class='down-main' style='margin-top: 50px;'>
+    <button id='restart' class='btn restart btn-warningg'>
+        Пройти тест сначала
+    </button>
+    <a href="/" class='btn btn-warningg'> На главную </a>
+</div>
+
+<footer style='margin-top: 50px;'>
+    <p class='downtext'> 2023 - computer literacy online - Красников Б. - Давыдова О. - Мерзликина А. </p>
+</footer>
+
+<script type="module" src="{% static 'js/js.cookie.mjs' %}"></script>
+    <script type="module">
+        import Cookies from '{% static 'js/js.cookie.mjs' %}'
+        let w = Cookies.get('what');
+        Cookies.remove('what');
+        Cookies.remove('answers');
+
+        $('.restart').click(function(){
+            window.location.href = "/"+w+"/1";
+        });
+    </script>
+
+{% endblock content%}
